@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+	<link rel="stylesheet" href="loginform.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <form action="signup.php" method="post" id="signupform" class="form-container">
+            <img class="logo-image" alt="website logo" src="https://assets.ccbp.in/frontend/react-js/logo-img.png " />
+            <label class="label-element" for="name">Name</label>
+            <input class="input-elements" type="text" id="fullname" name="fullname" placeholder="fullname" required><br/>
+            <p></p>
+            <label class="label-element">Username</label>
+            <input class="input-elements" type="text" id="username" name="username" placeholder="Username" required><br/>
+            <p></p>
+            <label class="label-element">Password</label>
+            <input class="input-elements" type="password" name="lpassword" id="lpassword" placeholder="password" required />
+            <p></p>
+            <button type="submit" class="login-button">
+                Sign In
+            </button>
+            <span id="error"></span>
+        </form>
+    </div>
+    <script>
+        let form=document.getElementById('signupform');
+            form.addEventListener('submit',event=>{
+                event.preventDefault();
+                validate();
+            });
+            function validate(){
+                let name=document.getElementById("fullname").value.trim();
+                let uname=document.getElementById("username").value.trim();
+                let pwd=document.getElementById("lpassword").value.trim();
+                let error=document.getElementById('error');
+                if (name==""){
+                    error.innerText=" * Name Cannot be Empty";
+                    return;
+                }
+                if (!isNaN(name)){
+                    error.innerText=" * Name Should not include Numbers";
+                    return;
+                }
+                if (name.length<3){
+                    error.innerText="*Name Should Contain atleast 3 letters";
+                    return;
+                }
+                if (uname==""){
+                    error.innerText="*Username cannot be empty";
+                    return;
+                }
+                if (pwd==""){
+                    error.innerText="*Password Cannot be Empty";
+                    return;
+                }
+                if (pwd.length<8){
+                    error.innerText="*Password must be atleast 8 characters";
+                    return;
+                }
+                if (!pwd.match(/[a-z]/)){
+                    error.innerText="*Must include atleast 1 lower case letter";
+                    return;
+                }
+                if (!pwd.match(/[A-Z]+/)){
+                    error.innerText="*Must include atleast 1 Upper case letter";
+                    return;
+                }
+                if (!pwd.match(/[$#@_\.]+/)){
+                    error.innerText="*Must include atleast 1 Special character";
+                    return;
+                }
+                if (!pwd.match(/[0-9]/)){
+                    error.innerText="*Must include atleast 1 Number";
+                    return;
+                }
+                form.submit();
+            }
+    </script>
+</body>
+
+</html>

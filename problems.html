@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Enter problems in village</title>
+<style type="text/css">
+	#btn1:hover{
+		background-color:blue;
+		color:white;
+	}
+	#btn2:hover{
+		background-color:green;
+		color:white;
+	}
+</style>
+</head>
+<body style="background-image:url(p1.jpeg);background-position:center;background-repeat:no-repeat;background-size:cover;height=100%;color:white;">
+	<form action="passdb.php" method="post" id="form">
+	<b>
+	<div align="center">
+	<h2 style="color:black;"><u>Enter problems in village</u></h2>
+	<label for="pname">Name:</label>
+	<input type="text" name="pname" id="pname"><br><br>
+	<span style="color:red" id="uerror"></span><br><br>
+	<label for="age">Age:</label>
+	<input type="text" name="page" id="age"><br><br>
+	<span style="color:red" id="aerror"></span><br><br>
+	<label for="pass">Problem:</label>
+	<input type="text" name="ppass" id="pass"><br><br>
+	<span style="color:red" id="perror"></span><br><br>
+	<label for="Phno">Phone number:</label>
+	<input type="text" name="pphno" id="phno"><br><br>
+	<span style="color:red" id="pherror"></span><br><br>
+	<label for="email">Email:</label>
+	<input type="email" name="pemail" id="email"><br><br>
+	<span style="color:red" id="eerror"></span><br><br>
+	<button type="submit" id="btn1" style="font-size:20px;border-radius:10px;width:80px;border-color:blue;">Submit</button>
+	<button type="reset" id="btn2" style="font-size:20px;border-radius:10px;width:80px;border-color:green;">Reset</button>
+	</div>
+	</b>
+	</form>
+	<script>
+	let name_count=0;
+	let age_count=0;
+	let pass_count=0;
+	let phno_count=0;
+	let email_count=0;
+	let form=document.getElementById('form');
+	let name=document.getElementById('pname');
+	let nerror=document.getElementById('uerror');
+	let age=document.getElementById('age');
+	let aerror=document.getElementById('aerror');
+	let pass=document.getElementById('pass');
+	let perror=document.getElementById('perror');
+	let phoneno=document.getElementById('phno');
+	let pherror=document.getElementById('pherror');
+	let email=document.getElementById('email');
+	let eerror=document.getElementById('eerror');
+	form.addEventListener('submit',(event)=>{
+							event.preventDefault(event);
+							n_validate(event);
+							a_validate(event);
+							p_validate(event);
+							ph_validate(event);
+							e_validate(event);
+							submit();
+						});
+	function n_validate(event)
+	{
+	let uname=name.value.trim();
+		if (uname=="")
+		{
+		nerror.innerText="Text should not be empty!";
+		name_count++;
+		}
+		else if (uname.length<3)
+		{
+		nerror.innerText="atleast three characters!";
+		name_count++;
+		}
+		else if (!isNaN(uname))
+		{
+		nerror.innerText="text should not have digits!";
+		name_count++;
+		}
+		else
+		{
+			nerror.innerText="";
+		}
+	}
+	function a_validate(event)
+	{
+	let age_no=age.value.trim();
+		if (age_no=="")
+		{
+		aerror.innerText="Text should not be empty!";
+		age_count++;
+		}
+		else if ((age_no<1) || (age_no>100))
+		{
+		aerror.innerText="Enter your age must be in between 1 and 100!";
+		age_count++;
+		}
+		else if (isNaN(age_no))
+		{
+		aerror.innerText="Text should have only digits!";
+		age_count++;
+		}
+		else
+		{
+			aerror.innerText="";
+		}
+	}
+	function p_validate(event)
+	{
+	let pass_no=pass.value.trim();
+		if (pass_no=="")
+		{
+		perror.innerText="Text should not be empty!";
+		pass_count++;
+		}
+		else if (!isNaN(pass_no))
+		{
+		perror.innerText="Text should not have any digits!";
+		pass_count++;
+		}
+		else
+		{
+			perror.innerText="";
+		}
+	}
+	function ph_validate(event)
+	{
+	let phone=phoneno.value.trim();
+		if (phone==="")
+		{
+		pherror.innerText="phone number should not be empty!";
+		phno_count++;
+		}
+		else if (!(phone.match(/^([0/91]?)([6-9])([0-9]{9})$/)))
+		{
+		pherror.innerText="Invalid phone number";
+		phno_count++;
+		}
+		else
+		{
+			pherror.innerText="";
+		}
+	}
+	function e_validate(event)
+	{
+	let mail=email.value.trim();
+	let pattern=/^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).([a-z]{3})$/;
+		if(mail==="")
+		{
+		eerror.innerText="mail should not be empty";
+		email_count++;
+		}
+		else if(!(mail.match(pattern)))
+		{
+		eerror.innerText="enter valid email";
+		email_count++;
+		}
+		else
+		{
+			eerror.innerText="";
+		}
+	}
+	function submit()
+	{
+	if((name_count==0)&&(age_count==0)&&(pass_count==0)&&(phno_count==0)&&(email_count==0))
+	{
+		form.submit();
+	}
+	}
+	</script>
+</body>
+</html>
+

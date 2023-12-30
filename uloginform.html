@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+	<link rel="stylesheet" href="loginform.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <form action="problems.html" method="post" id="loginform" class="form-container">
+            <label class="label-element" for="name">Username</label>
+            <input placeholder="Username" class="input-elements" type="text" id="name" name="name" required>
+            <p id="nameerror"></p>
+            <label class="label-element" for="paswword">Password</label>
+            <input placeholder="password" type="password" class="input-elements"  name="password" id="password" required />
+            <p id="passworderror"></p>
+	    <div align="center">
+            <a href="problems.html" target="_blank"> <button type="submit" class="login-button" style="background-color:#4f46e5;border-width:0px;color:white;" >
+                Login
+            </button></a>
+	    </div>
+            <p class="or">-----or-----</p>
+            <div align="center">
+                <a href="signup.html"><button style="background-color:#4f46e5;border-width:0px;color:white;" type="submit" > Sign In </button></a>
+            </div>
+            <!-- <button class="signin"  ><a href="signup.html">sign up</a></button> -->
+        </form>
+    </div>
+    <script>
+        let form=document.getElementById('loginform');
+            form.addEventListener('submit',event=>{
+                event.preventDefault();
+                validate();
+            });
+            function validate(){
+                let name=document.getElementById("name").value.trim();
+                let pwd=document.getElementById("password").value.trim();
+                let nameerror=document.getElementById('nameerror');
+                let passworderror=document.getElementById("passworderror")
+                if (name==""){
+                    nameerror.innerText=" * Name Cannot be Empty";
+                    return;
+                }
+
+                if (!isNaN(name)){
+                    nameerror.innerText=" * Name Should not include Numbers";
+                    return;
+                }
+                if (name.length<3){
+                    nameerror.innerText="*Name Should Contain atleast 3 letters";
+                    return;
+                }
+                if (pwd==""){
+                    passworderror.innerText="*Password Cannot be Empty";
+                    return;
+                }
+                if (pwd.length<8){
+                    passworderror.innerText="*Password must be atleast 8 characters";
+                    return;
+                }
+                if (!pwd.match(/[a-z]/)){
+                    passworderror.innerText="*Must include atleast 1 lower case letter";
+                    return;
+                }
+                if (!pwd.match(/[A-Z]+/)){
+                    passworderror.innerText="*Must include atleast 1 Upper case letter";
+                    return;
+                }
+                if (!pwd.match(/[$#@_\.]+/)){
+                    passworderror.innerText="*Must include atleast 1 Special character";
+                    return;
+                }
+                if (!pwd.match(/[0-9]/)){
+                    passworderror.innerText="*Must include atleast 1 Number";
+                    return;
+                }
+                form.submit();
+            }
+    </script>
+</body>
+
+</html>
